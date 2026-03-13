@@ -16,7 +16,7 @@ const LazuliHeader = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-[#2B3F9E]">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-cobalt">
       <div className="container mx-auto flex items-center justify-between px-6 py-1">
         {/* Logo */}
         <a href="#" className="flex-shrink-0">
