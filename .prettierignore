@@ -1,0 +1,11 @@
+# Prettier ignore file
+node_modules
+dist
+build
+.env
+.env.local
+.env.*.local
+.git
+coverage
+.next
+out

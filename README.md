@@ -1,73 +1,95 @@
-# Welcome to your Lovable project
+# Lazuli Estúdio de Pilates
 
-## Project info
+Website moderno e responsivo para o Lazuli Estúdio de Pilates, localizado em Santa Cruz do Sul. Construído com tecnologias modernas para oferecer a melhor experiência aos visitantes.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+## 🚀 Começando
 
-## How can I edit this code?
+### Pré-requisitos
+- Node.js 18.x ou superior
+- npm ou bun
 
-There are several ways of editing your application.
-
-**Use Lovable**
-
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
+### Instalação
 
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+# Clonar o repositório
+git clone <seu-repositorio>
+cd lazuli-flow
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+# Instalar dependências
+npm install
+# ou
+bun install
 ```
 
-**Edit a file directly in GitHub**
+### Desenvolvimento
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+```sh
+# Iniciar servidor de desenvolvimento
+npm run dev
 
-**Use GitHub Codespaces**
+# Abrir em http://localhost:8080
+```
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+### Build de Produção
 
-## What technologies are used for this project?
+```sh
+npm run build
+npm run preview
+```
 
-This project is built with:
+## 📋 Comandos Disponíveis
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+- `npm run dev` - Inicia o servidor de desenvolvimento
+- `npm run build` - Build para produção
+- `npm run preview` - Preview local do build
+- `npm run lint` - Executa o linter
+- `npm test` - Executa testes unitários
+- `npm run test:watch` - Modo watch para testes
 
-## How can I deploy this project?
+## 🛠️ Tecnologias
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+- **Vite** - Build tool rápido e moderno
+- **React 18** - Biblioteca UI
+- **TypeScript** - Type safety
+- **Tailwind CSS** - Utility-first CSS
+- **shadcn-ui** - Componentes acessíveis
+- **React Router** - Roteamento
+- **React Hook Form** - Gerenciamento de formulários
+- **React Query** - Data fetching
+- **Vitest** - Testing framework
+- **Playwright** - E2E testing
 
-## Can I connect a custom domain to my Lovable project?
+## 📁 Estrutura do Projeto
 
-Yes, you can!
+```
+src/
+├── components/       # Componentes React
+│   ├── ui/          # Componentes UI reutilizáveis
+│   └── *Section.tsx # Seções da página
+├── pages/           # Páginas da aplicação
+├── hooks/           # Custom React hooks
+├── lib/             # Utilitários e helpers
+├── assets/          # Imagens e recursos
+└── test/            # Testes
+```
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+## 🌐 Deployment
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+O projeto pode ser deployado em qualquer plataforma que suporte Node.js:
+
+- **Vercel** - Recomendado para Next.js/Vite projects
+- **Netlify** - Suporte total a Vite
+- **GitHub Pages** - Com ações do GitHub
+- **Docker** - Containerizar a aplicação
+
+## 📝 Variáveis de Ambiente
+
+Copie `.env.example` para `.env.local` e configure conforme necessário:
+
+```bash
+cp .env.example .env.local
+```
+
+## 📄 Licença
+
+Este projeto é de uso privado do Lazuli Estúdio de Pilates.

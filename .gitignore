@@ -7,12 +7,21 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# Dependencies
 node_modules
+
+# Production
 dist
 dist-ssr
 *.local
+build
 
-# Editor directories and files
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# IDE
 .vscode/*
 !.vscode/extensions.json
 .idea
@@ -22,3 +31,26 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+*.swp
+*.swo
+*~
+.vscode
+.idea
+
+# Testing
+coverage
+.nyc_output
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build files
+dist
+build
+out
+
+# Lock files (optional - uncomment if you prefer not to commit these)
+# package-lock.json
+# yarn.lock
+# pnpm-lock.yaml
