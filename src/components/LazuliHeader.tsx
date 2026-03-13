@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import lazuliLogo from "@/assets/lazuli-logo-transparent.png";
+import sunSymbol from "@/assets/lazuli-sun-symbol.png";
 
 const WHATSAPP_URL = "https://wa.me/5551981275158";
 
@@ -19,12 +19,20 @@ const LazuliHeader = () => {
     <header className="fixed top-0 left-0 right-0 z-50 bg-cobalt">
       <div className="container mx-auto flex items-center justify-between px-6 py-3">
         {/* Logo */}
-        <a href="#" className="flex-shrink-0">
+        <a href="#" className="flex items-center gap-3">
           <img
-            src={lazuliLogo}
-            alt="Lazuli estúdio de pilates"
-            className="h-14 w-auto"
+            src={sunSymbol}
+            alt=""
+            className="h-10 w-10"
           />
+          <div className="flex flex-col">
+            <span className="text-xl font-bold leading-tight tracking-wide text-primary-foreground">
+              Lazuli
+            </span>
+            <span className="text-[10px] font-light tracking-[0.15em] text-primary-foreground/80">
+              estúdio de pilates
+            </span>
+          </div>
         </a>
 
         {/* Desktop Nav */}
