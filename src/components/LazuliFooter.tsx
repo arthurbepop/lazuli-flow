@@ -7,30 +7,6 @@ const LazuliFooter = () => {
   return (
     <footer id="contato" className="bg-cobalt py-24">
       <div className="container mx-auto px-6">
-        {/* CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center"
-        >
-          <h2 className="text-3xl font-bold text-primary-foreground md:text-4xl">
-            Pronta para dar o{" "}
-            <span className="text-gold">primeiro passo?</span>
-          </h2>
-
-          <a
-            href={WHATSAPP_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-8 inline-flex items-center gap-3 rounded-lg bg-gold px-10 py-5 text-lg font-bold text-primary-foreground shadow-lg transition-all hover:bg-gold-light hover:shadow-xl"
-          >
-            <MessageCircle className="h-6 w-6" />
-            Fale Conosco no WhatsApp
-          </a>
-        </motion.div>
-
         {/* Info Columns */}
         <div className="mt-20 grid gap-10 text-center sm:grid-cols-3">
           <div>

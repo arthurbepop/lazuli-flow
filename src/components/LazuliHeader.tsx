@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import lazuliLogo from "@/assets/lazuli-logo.png";
+import lazuliLogo from "@/assets/lazulilogotransparente.png";
 
 const WHATSAPP_URL = "https://wa.me/5551981275158";
 
 const navLinks = [
   { label: "Sobre", href: "#sobre" },
+  { label: "Abordagem", href: "#abordagem" },
   { label: "Benefícios", href: "#beneficios" },
-  { label: "Ambiente", href: "#ambiente" },
   { label: "Contato", href: "#contato" },
 ];
 

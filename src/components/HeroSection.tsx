@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { MessageCircle } from "lucide-react";
-import heroImage from "@/assets/hero-pilates.jpg";
+import heroImage from "@/assets/pilates1.jpg";
 
 const WHATSAPP_URL = "https://wa.me/5551981275158";
 
