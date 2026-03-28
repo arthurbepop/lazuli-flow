@@ -1,5 +1,12 @@
 import { motion } from "framer-motion";
 import { Briefcase, User, RotateCw, Zap } from "lucide-react";
+import {
+  fadeUp,
+  staggerContainer,
+  staggerItem,
+  viewportReveal,
+} from "@/lib/motion";
+import { usePrefersReducedMotion } from "@/hooks/use-prefers-reduced-motion";
 
 const profiles = [
   {
@@ -29,50 +36,64 @@ const profiles = [
 ];
 
 const BenefitsSection = () => {
+  const reduced = usePrefersReducedMotion();
+
   return (
-    <section id="beneficios" className="bg-muted py-24">
-      <div className="container mx-auto px-6">
+    <section id="beneficios" className="relative z-10 py-28 md:py-36">
+      <div className="container mx-auto max-w-6xl px-6">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center"
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportReveal}
+          variants={fadeUp}
+          className="mx-auto max-w-2xl text-center"
         >
-          <span className="text-sm font-semibold uppercase tracking-widest text-gold">
-            Para Quem é Ideal
+          <span className="font-sans text-[11px] font-semibold uppercase tracking-[0.35em] text-gold">
+            Para quem é ideal
           </span>
-          <h2 className="mt-3 text-3xl font-bold tracking-tight text-foreground md:text-4xl">
+          <h2 className="mt-5 text-4xl font-medium text-foreground md:text-5xl">
             Pilates é para todos
           </h2>
-          <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
-            Não importa seu histórico. Se você quer sentir-se melhor, estamos aqui.
+          <p className="mt-6 font-sans text-lg leading-relaxed text-muted-foreground">
+            Não importa seu histórico. Se você quer sentir-se melhor, estamos
+            aqui.
           </p>
         </motion.div>
 
-        <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {profiles.map((profile, i) => (
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportReveal}
+          variants={staggerContainer}
+          className="mt-20 grid gap-6 sm:grid-cols-2 lg:grid-cols-4"
+        >
+          {profiles.map((profile) => (
             <motion.div
               key={profile.title}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="rounded-lg bg-card p-8 shadow-sm transition-shadow hover:shadow-md border border-border"
+              variants={staggerItem}
+              whileHover={
+                reduced
+                  ? undefined
+                  : {
+                      y: -4,
+                      transition: { type: "spring", stiffness: 280, damping: 24 },
+                    }
+              }
+              className="glass-zen group rounded-2xl p-8 transition-colors hover:border-gold/25"
             >
               <profile.icon
-                className="h-8 w-8 text-gold"
-                strokeWidth={1.5}
+                className="h-7 w-7 text-gold"
+                strokeWidth={1.15}
               />
-              <h3 className="mt-5 text-lg font-semibold text-foreground">
+              <h3 className="font-display mt-6 text-xl text-foreground">
                 {profile.title}
               </h3>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+              <p className="mt-4 font-sans text-sm leading-relaxed text-muted-foreground">
                 {profile.description}
               </p>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

@@ -8,3 +8,4 @@ export { useToast } from "./use-toast";
 export { useApi } from "./use-api";
 export { useDebounce } from "./use-debounce";
 export { useLocalStorage } from "./use-local-storage";
+export { usePrefersReducedMotion } from "./use-prefers-reduced-motion";

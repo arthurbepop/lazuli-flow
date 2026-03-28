@@ -1,5 +1,12 @@
 import { motion } from "framer-motion";
-import { CheckCircle2, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import {
+  fadeUp,
+  staggerContainer,
+  staggerItem,
+  viewportReveal,
+} from "@/lib/motion";
+import { usePrefersReducedMotion } from "@/hooks/use-prefers-reduced-motion";
 
 const steps = [
   {
@@ -33,100 +40,77 @@ const steps = [
 ];
 
 const ClassesSection = () => {
+  const reduced = usePrefersReducedMotion();
+
   return (
-    <section id="abordagem" className="relative bg-background py-24">
-      <div className="container mx-auto px-6">
+    <section id="abordagem" className="relative z-10 py-28 md:py-36">
+      <div className="container mx-auto max-w-6xl px-6">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportReveal}
+          variants={fadeUp}
+          className="mb-20 text-center"
         >
-          <span className="text-sm font-semibold uppercase tracking-widest text-gold">
-            Como Funciona
+          <span className="font-sans text-[11px] font-semibold uppercase tracking-[0.35em] text-gold">
+            Como funciona
           </span>
-          <h2 className="mt-3 text-3xl font-bold tracking-tight text-foreground md:text-4xl">
+          <h2 className="mt-5 text-4xl font-medium text-foreground md:text-5xl">
             Seu caminho é claro e simples
           </h2>
-          <p className="mt-4 text-lg text-muted-foreground max-w-3xl mx-auto">
-            4 passos para transformar sua relação com o corpo. Começar é fácil.
+          <p className="mx-auto mt-6 max-w-2xl font-sans text-lg leading-relaxed text-muted-foreground">
+            Quatro passos para transformar sua relação com o corpo. Começar é
+            fácil.
           </p>
         </motion.div>
 
-        {/* Steps */}
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4 mb-16">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportReveal}
+          variants={staggerContainer}
+          className="grid gap-6 md:grid-cols-2 lg:grid-cols-4"
+        >
           {steps.map((step, index) => (
             <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="group relative overflow-hidden rounded-xl border border-border bg-card p-8 shadow-sm hover:shadow-lg hover:border-gold/50 transition-all"
+              key={step.number}
+              variants={staggerItem}
+              className="glass-zen group relative overflow-hidden rounded-2xl p-8 transition-colors hover:border-gold/30"
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-gold/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-
               <div className="relative z-10">
-                <div className="flex items-start justify-between mb-4">
-                  <div className="text-4xl font-bold text-gold/30 group-hover:text-gold/60 transition-colors">
+                <div className="mb-6 flex items-start justify-between">
+                  <span className="font-display text-5xl font-medium text-gold/35 transition-colors group-hover:text-gold/60">
                     {step.number}
-                  </div>
-                  <span className="text-xs font-semibold text-gold uppercase bg-gold/10 px-3 py-1 rounded-full">
+                  </span>
+                  <span className="rounded-full border border-gold/20 bg-gold/5 px-3 py-1 font-sans text-[10px] font-semibold uppercase tracking-wider text-gold">
                     {step.highlight}
                   </span>
                 </div>
 
-                <h3 className="text-lg font-bold text-foreground mb-3">
+                <h3 className="font-display text-xl text-foreground">
                   {step.title}
                 </h3>
-                <p className="text-muted-foreground text-sm leading-relaxed">
+                <p className="mt-4 font-sans text-sm leading-relaxed text-muted-foreground">
                   {step.description}
                 </p>
 
                 {index < steps.length - 1 && (
-                  <div className="hidden lg:block absolute -right-4 top-1/2 text-gold/30">
-                    <ArrowRight className="h-5 w-5" />
+                  <div className="absolute -right-2 top-1/2 hidden text-gold/30 lg:block">
+                    <motion.span
+                      animate={reduced ? undefined : { x: [0, 4, 0] }}
+                      transition={{
+                        duration: 2.4,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                      }}
+                    >
+                      <ArrowRight className="h-5 w-5" strokeWidth={1.25} />
+                    </motion.span>
                   </div>
                 )}
               </div>
             </motion.div>
           ))}
-        </div>
-
-        {/* Pricing/Offer */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="bg-gradient-to-r from-gold/5 to-gold/0 border border-gold/20 rounded-xl p-8 text-center"
-        >
-          <h3 className="text-2xl font-bold text-foreground mb-3">
-            Pronto para Começar?
-          </h3>
-          <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-            A avaliação é <span className="font-semibold text-gold">GRATUITA</span> e sem compromisso.
-            Conhecendo você, criamos a proposta perfeita.
-          </p>
-          
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <div className="text-left">
-              <p className="text-sm text-muted-foreground">Pacotes a partir de:</p>
-              <p className="text-2xl font-bold text-foreground">R$ 120/mês*</p>
-              <p className="text-xs text-muted-foreground mt-1">*Modalidade MAT pilates</p>
-            </div>
-            
-            <a
-              href="https://wa.me/5551981275158"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-gold hover:bg-gold-light text-primary-foreground font-semibold py-3 px-8 rounded-lg transition-all hover:shadow-lg"
-            >
-              <CheckCircle2 className="h-5 w-5" />
-              Agendar Avaliação Gratuita
-            </a>
-          </div>
         </motion.div>
       </div>
     </section>

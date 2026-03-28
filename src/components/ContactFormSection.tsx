@@ -1,6 +1,17 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Mail, Phone, MapPin, MessageCircle } from "lucide-react";
+import {
+  slideFromLeft,
+  slideFromRight,
+  staggerContainer,
+  staggerItem,
+  viewportReveal,
+} from "@/lib/motion";
+import { CONTACT_INFO, WHATSAPP_URL } from "@/lib/constants";
+
+const inputClass =
+  "mt-2 w-full rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3 font-sans text-foreground placeholder:text-muted-foreground/70 backdrop-blur-sm transition-colors focus:border-gold/40 focus:outline-none focus:ring-1 focus:ring-gold/30";
 
 const ContactFormSection = () => {
   const [formData, setFormData] = useState({
@@ -24,12 +35,10 @@ const ContactFormSection = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Enviar para WhatsApp
     const message = `Nome: ${formData.name}%0AEmail: ${formData.email}%0ATelefone: ${formData.phone}%0AMensagem: ${formData.message}`;
-    const whatsappURL = `https://wa.me/5551981275158?text=${message}`;
+    const whatsappURL = `${WHATSAPP_URL}?text=${message}`;
     window.open(whatsappURL, "_blank");
 
-    // Reset form
     setFormData({ name: "", email: "", phone: "", message: "" });
     setSubmitted(true);
 
@@ -37,115 +46,101 @@ const ContactFormSection = () => {
   };
 
   return (
-    <section className="bg-background py-24">
-      <div className="container mx-auto px-6">
-        <div className="grid gap-12 lg:grid-cols-2">
-          {/* Left - Info */}
+    <section id="contato" className="relative z-10 pb-28 pt-12 md:pb-36">
+      <div className="container mx-auto max-w-6xl px-6">
+        <div className="grid gap-10 lg:grid-cols-2 lg:gap-14">
           <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportReveal}
+            variants={slideFromLeft}
+            className="glass-zen rounded-[1.75rem] p-10 md:p-12"
           >
-            <div>
-              <span className="text-sm font-semibold uppercase tracking-widest text-gold">
-                Entre em Contato
-              </span>
-              <h2 className="mt-3 text-3xl font-bold tracking-tight text-foreground md:text-4xl">
-                Vamos conversar sobre seus objetivos
-              </h2>
-              <p className="mt-6 text-lg text-muted-foreground">
-                Estamos aqui para ajudá-lo a alcançar seus objetivos de saúde
-                e bem-estar. Entre em contato conosco para marcar uma aula
-                experimental gratuita ou tirar suas dúvidas.
-              </p>
-            </div>
+            <span className="font-sans text-[11px] font-semibold uppercase tracking-[0.35em] text-gold">
+              Entre em contato
+            </span>
+            <h2 className="mt-5 font-display text-4xl text-foreground md:text-5xl">
+              Vamos conversar sobre seus objetivos
+            </h2>
+            <p className="mt-8 font-sans text-lg leading-relaxed text-muted-foreground">
+              Estamos aqui para ajudá-la a alcançar seus objetivos de saúde e
+              bem-estar. Marque uma aula experimental gratuita ou tire suas
+              dúvidas.
+            </p>
 
-            {/* Contact Info */}
-            <div className="mt-12 space-y-8">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.1 }}
-                className="flex gap-4"
-              >
-                <div className="flex-shrink-0">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-gold/10">
-                    <MapPin className="h-6 w-6 text-gold" />
-                  </div>
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={viewportReveal}
+              variants={staggerContainer}
+              className="mt-12 space-y-8 border-t border-white/10 pt-10"
+            >
+              <motion.div variants={staggerItem} className="flex gap-5">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/[0.05]">
+                  <MapPin className="h-5 w-5 text-gold" strokeWidth={1.25} />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-foreground">Localização</h3>
-                  <p className="mt-1 text-muted-foreground">
-                    Santa Cruz do Sul, RS
+                  <h3 className="font-sans text-xs font-semibold uppercase tracking-wider text-foreground">
+                    Localização
+                  </h3>
+                  <p className="mt-2 font-sans text-sm leading-relaxed text-muted-foreground">
+                    {CONTACT_INFO.addressLines.map((line) => (
+                      <span key={line} className="block">
+                        {line}
+                      </span>
+                    ))}
                   </p>
                 </div>
               </motion.div>
 
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                className="flex gap-4"
-              >
-                <div className="flex-shrink-0">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-gold/10">
-                    <Phone className="h-6 w-6 text-gold" />
-                  </div>
+              <motion.div variants={staggerItem} className="flex gap-5">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/[0.05]">
+                  <Phone className="h-5 w-5 text-gold" strokeWidth={1.25} />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-foreground">Telefone</h3>
+                  <h3 className="font-sans text-xs font-semibold uppercase tracking-wider text-foreground">
+                    Telefone
+                  </h3>
                   <a
-                    href="https://wa.me/5551981275158"
+                    href={WHATSAPP_URL}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="mt-1 text-muted-foreground hover:text-gold transition-colors"
+                    className="mt-2 inline-block font-sans text-sm text-muted-foreground transition-colors hover:text-gold"
                   >
-                    (51) 98127-5158
+                    {CONTACT_INFO.phone}
                   </a>
                 </div>
               </motion.div>
 
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.3 }}
-                className="flex gap-4"
-              >
-                <div className="flex-shrink-0">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-gold/10">
-                    <Mail className="h-6 w-6 text-gold" />
-                  </div>
+              <motion.div variants={staggerItem} className="flex gap-5">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/[0.05]">
+                  <Mail className="h-5 w-5 text-gold" strokeWidth={1.25} />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-foreground">Email</h3>
+                  <h3 className="font-sans text-xs font-semibold uppercase tracking-wider text-foreground">
+                    E-mail
+                  </h3>
                   <a
-                    href="mailto:contato@lazulipilates.com.br"
-                    className="mt-1 text-muted-foreground hover:text-gold transition-colors"
+                    href={`mailto:${CONTACT_INFO.email}`}
+                    className="mt-2 inline-block font-sans text-sm text-muted-foreground transition-colors hover:text-gold"
                   >
-                    contato@lazulipilates.com.br
+                    {CONTACT_INFO.email}
                   </a>
                 </div>
               </motion.div>
-            </div>
+            </motion.div>
           </motion.div>
 
-          {/* Right - Form */}
           <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportReveal}
+            variants={slideFromRight}
+            className="glass-zen rounded-[1.75rem] p-8 md:p-10"
           >
-            <form
-              onSubmit={handleSubmit}
-              className="space-y-6 rounded-xl border border-border bg-card p-8 shadow-sm"
-            >
+            <form onSubmit={handleSubmit} className="space-y-6">
               <div>
-                <label htmlFor="name" className="block text-sm font-medium">
+                <label htmlFor="name" className="font-sans text-xs uppercase tracking-wider text-muted-foreground">
                   Nome
                 </label>
                 <input
@@ -156,13 +151,13 @@ const ContactFormSection = () => {
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className="mt-2 w-full rounded-lg border border-border bg-background px-4 py-2.5 text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-gold focus:border-transparent"
+                  className={inputClass}
                 />
               </div>
 
               <div>
-                <label htmlFor="email" className="block text-sm font-medium">
-                  Email
+                <label htmlFor="email" className="font-sans text-xs uppercase tracking-wider text-muted-foreground">
+                  E-mail
                 </label>
                 <input
                   id="email"
@@ -172,12 +167,12 @@ const ContactFormSection = () => {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="mt-2 w-full rounded-lg border border-border bg-background px-4 py-2.5 text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-gold focus:border-transparent"
+                  className={inputClass}
                 />
               </div>
 
               <div>
-                <label htmlFor="phone" className="block text-sm font-medium">
+                <label htmlFor="phone" className="font-sans text-xs uppercase tracking-wider text-muted-foreground">
                   Telefone
                 </label>
                 <input
@@ -187,46 +182,46 @@ const ContactFormSection = () => {
                   placeholder="(51) 99999-9999"
                   value={formData.phone}
                   onChange={handleChange}
-                  className="mt-2 w-full rounded-lg border border-border bg-background px-4 py-2.5 text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-gold focus:border-transparent"
+                  className={inputClass}
                 />
               </div>
 
               <div>
-                <label htmlFor="message" className="block text-sm font-medium">
+                <label htmlFor="message" className="font-sans text-xs uppercase tracking-wider text-muted-foreground">
                   Mensagem
                 </label>
                 <textarea
                   id="message"
                   name="message"
-                  placeholder="Como podemos ajudá-lo?"
+                  placeholder="Como podemos ajudá-la?"
                   value={formData.message}
                   onChange={handleChange}
                   required
                   rows={4}
-                  className="mt-2 w-full rounded-lg border border-border bg-background px-4 py-2.5 text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-gold focus:border-transparent"
+                  className={`${inputClass} resize-none`}
                 />
               </div>
 
               {submitted && (
                 <motion.div
-                  initial={{ opacity: 0, y: -10 }}
+                  initial={{ opacity: 0, y: -8 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="rounded-lg bg-green-50 border border-green-200 p-4 text-green-800"
+                  className="rounded-xl border border-gold/25 bg-gold/10 px-4 py-3 font-sans text-sm text-foreground"
                 >
-                  ✓ Mensagem enviada! Falaremos em breve.
+                  Mensagem enviada — abrimos o WhatsApp para você.
                 </motion.div>
               )}
 
               <button
                 type="submit"
-                className="w-full flex items-center justify-center gap-2 bg-gold hover:bg-gold-light text-primary-foreground font-semibold py-3 px-6 rounded-lg transition-all"
+                className="flex w-full items-center justify-center gap-2 rounded-full bg-gold py-3.5 font-sans text-sm font-semibold uppercase tracking-widest text-accent-foreground transition-colors hover:bg-gold-light"
               >
                 <MessageCircle className="h-5 w-5" />
-                Enviar Mensagem
+                Enviar mensagem
               </button>
 
-              <p className="text-center text-sm text-muted-foreground">
-                Responderemos em até 24 horas
+              <p className="text-center font-sans text-xs text-muted-foreground">
+                Respondemos em até 24 horas
               </p>
             </form>
           </motion.div>

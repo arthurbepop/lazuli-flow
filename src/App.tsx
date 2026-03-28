@@ -2,6 +2,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ReactNode } from "react";
 import React from "react";
+import { ReactLenis } from "lenis/react";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -30,7 +31,7 @@ class ErrorBoundary extends React.Component<
   render() {
     if (this.state.hasError) {
       return (
-        <div className="flex min-h-screen items-center justify-center bg-muted">
+        <div className="flex min-h-screen items-center justify-center bg-background">
           <div className="text-center">
             <h1 className="mb-4 text-4xl font-bold">Erro</h1>
             <p className="mb-4 text-xl text-muted-foreground">
@@ -51,20 +52,29 @@ class ErrorBoundary extends React.Component<
   }
 }
 
+const lenisOptions = {
+  duration: 1.15,
+  smoothWheel: true,
+  lerp: 0.085,
+  wheelMultiplier: 0.92,
+} as const;
+
 const App = () => (
   <ErrorBoundary>
-    <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
-      </TooltipProvider>
-    </QueryClientProvider>
+    <ReactLenis root options={lenisOptions}>
+      <QueryClientProvider client={queryClient}>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </BrowserRouter>
+        </TooltipProvider>
+      </QueryClientProvider>
+    </ReactLenis>
   </ErrorBoundary>
 );
 
