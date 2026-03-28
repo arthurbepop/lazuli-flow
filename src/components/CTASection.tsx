@@ -1,9 +1,9 @@
+import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { MessageCircle, ArrowRight } from "lucide-react";
+import { ArrowRight, MessageCircle } from "lucide-react";
+import { usePrefersReducedMotion } from "@/hooks/use-prefers-reduced-motion";
 import { WHATSAPP_URL } from "@/lib/constants";
 import { fadeUp, smoothEase, viewportReveal } from "@/lib/motion";
-import { usePrefersReducedMotion } from "@/hooks/use-prefers-reduced-motion";
-import { useRef } from "react";
 
 const CTASection = () => {
   const reduced = usePrefersReducedMotion();
@@ -12,23 +12,15 @@ const CTASection = () => {
     target: ref,
     offset: ["start end", "end start"],
   });
-  const blobTop = useTransform(
-    scrollYProgress,
-    [0, 1],
-    reduced ? [0, 0] : [28, -24]
-  );
+  const blobTop = useTransform(scrollYProgress, [0, 1], reduced ? [0, 0] : [28, -24]);
   const blobBottom = useTransform(
     scrollYProgress,
     [0, 1],
-    reduced ? [0, 0] : [-24, 28]
+    reduced ? [0, 0] : [-24, 28],
   );
 
   return (
-    <section
-      ref={ref}
-      id="cta"
-      className="relative z-10 py-28 md:py-36"
-    >
+    <section ref={ref} id="cta" className="relative z-10 py-28 md:py-36">
       <motion.div
         style={{ y: blobTop }}
         className="pointer-events-none absolute -right-40 top-0 h-[28rem] w-[28rem] rounded-full bg-[radial-gradient(circle,hsl(46,50%,45%)/0.12,transparent_70%)] blur-3xl"

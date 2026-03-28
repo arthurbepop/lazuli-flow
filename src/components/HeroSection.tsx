@@ -2,7 +2,7 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { MessageCircle, ChevronDown } from "lucide-react";
 import heroImage from "@/assets/pilates1.jpg";
-import { WHATSAPP_URL } from "@/lib/constants";
+import { STUDIO_INFO, WHATSAPP_URL } from "@/lib/constants";
 import { fadeUp, smoothEase, softSpring } from "@/lib/motion";
 import { usePrefersReducedMotion } from "@/hooks/use-prefers-reduced-motion";
 
@@ -15,10 +15,18 @@ const HeroSection = () => {
   });
   const { scrollY } = useScroll();
 
-  const imageY = useTransform(scrollYProgress, [0, 1], ["0%", reduced ? "0%" : "18%"]);
+  const imageY = useTransform(
+    scrollYProgress,
+    [0, 1],
+    ["0%", reduced ? "0%" : "18%"],
+  );
   const imageScale = useTransform(scrollYProgress, [0, 1], [1, reduced ? 1 : 1.04]);
   const contentOpacity = useTransform(scrollYProgress, [0, 0.42], [1, 0.25]);
   const hintOpacity = useTransform(scrollY, [0, 160], [1, 0]);
+
+  const overlayOpacity = useTransform(scrollY, [0, 120, 320], [0.95, 0.85, 0.72]);
+  const overlayBlur = useTransform(scrollY, [0, 120, 320], [20, 16, 10]);
+  const overlayFilter = useTransform(overlayBlur, (value) => `blur(${value}px)`);
 
   return (
     <section
@@ -41,7 +49,10 @@ const HeroSection = () => {
             transition={{ duration: 1.35, ease: smoothEase }}
           />
         </motion.div>
-        <div className="absolute inset-0 bg-gradient-to-b from-cobalt-deep/70 via-cobalt-deep/50 to-[hsl(226,52%,11%)]/90" />
+        <motion.div
+          style={{ opacity: overlayOpacity, filter: overlayFilter }}
+          className="absolute inset-0 bg-gradient-to-b from-cobalt-deep/70 via-cobalt-deep/50 to-[hsl(226,52%,11%)]/90"
+        />
         <div className="grain-overlay pointer-events-none absolute inset-0 opacity-30" />
       </div>
 
@@ -74,8 +85,8 @@ const HeroSection = () => {
               transition={softSpring}
               className="mx-auto mt-8 max-w-xl font-sans text-lg font-light leading-relaxed text-primary-foreground/85 md:text-xl"
             >
-              Descubra o poder do Pilates no ambiente mais acolhedor e premium de
-              Santa Cruz do Sul.
+              Descubra o poder do Pilates no ambiente mais acolhedor e premium de{" "}
+              {STUDIO_INFO.city}.
             </motion.p>
 
             <motion.div variants={fadeUp} transition={softSpring} className="mt-12">

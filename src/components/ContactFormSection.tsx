@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
-import { Mail, Phone, MapPin, MessageCircle } from "lucide-react";
+import { Mail, MapPin, MessageCircle, Phone } from "lucide-react";
+import { CONTACT_INFO, WHATSAPP_URL } from "@/lib/constants";
 import {
   slideFromLeft,
   slideFromRight,
@@ -8,12 +9,12 @@ import {
   staggerItem,
   viewportReveal,
 } from "@/lib/motion";
-import { CONTACT_INFO, WHATSAPP_URL } from "@/lib/constants";
 
 const inputClass =
   "mt-2 w-full rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3 font-sans text-foreground placeholder:text-muted-foreground/70 backdrop-blur-sm transition-colors focus:border-gold/40 focus:outline-none focus:ring-1 focus:ring-gold/30";
 
 const ContactFormSection = () => {
+  const resetFeedbackTimeoutRef = useRef<number | null>(null);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -23,7 +24,7 @@ const ContactFormSection = () => {
   const [submitted, setSubmitted] = useState(false);
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -32,17 +33,38 @@ const ContactFormSection = () => {
     }));
   };
 
+  useEffect(() => {
+    return () => {
+      if (resetFeedbackTimeoutRef.current) {
+        window.clearTimeout(resetFeedbackTimeoutRef.current);
+      }
+    };
+  }, []);
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    const message = `Nome: ${formData.name}%0AEmail: ${formData.email}%0ATelefone: ${formData.phone}%0AMensagem: ${formData.message}`;
-    const whatsappURL = `${WHATSAPP_URL}?text=${message}`;
-    window.open(whatsappURL, "_blank");
+    const lines = [
+      `Nome: ${formData.name.trim()}`,
+      `E-mail: ${formData.email.trim()}`,
+      formData.phone.trim() ? `Telefone: ${formData.phone.trim()}` : "",
+      `Mensagem: ${formData.message.trim()}`,
+    ].filter(Boolean);
+
+    const whatsappURL = `${WHATSAPP_URL}?text=${encodeURIComponent(lines.join("\n"))}`;
+    window.open(whatsappURL, "_blank", "noopener,noreferrer");
 
     setFormData({ name: "", email: "", phone: "", message: "" });
     setSubmitted(true);
 
-    setTimeout(() => setSubmitted(false), 3000);
+    if (resetFeedbackTimeoutRef.current) {
+      window.clearTimeout(resetFeedbackTimeoutRef.current);
+    }
+
+    resetFeedbackTimeoutRef.current = window.setTimeout(() => {
+      setSubmitted(false);
+      resetFeedbackTimeoutRef.current = null;
+    }, 3000);
   };
 
   return (
@@ -140,7 +162,10 @@ const ContactFormSection = () => {
           >
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
-                <label htmlFor="name" className="font-sans text-xs uppercase tracking-wider text-muted-foreground">
+                <label
+                  htmlFor="name"
+                  className="font-sans text-xs uppercase tracking-wider text-muted-foreground"
+                >
                   Nome
                 </label>
                 <input
@@ -156,7 +181,10 @@ const ContactFormSection = () => {
               </div>
 
               <div>
-                <label htmlFor="email" className="font-sans text-xs uppercase tracking-wider text-muted-foreground">
+                <label
+                  htmlFor="email"
+                  className="font-sans text-xs uppercase tracking-wider text-muted-foreground"
+                >
                   E-mail
                 </label>
                 <input
@@ -172,7 +200,10 @@ const ContactFormSection = () => {
               </div>
 
               <div>
-                <label htmlFor="phone" className="font-sans text-xs uppercase tracking-wider text-muted-foreground">
+                <label
+                  htmlFor="phone"
+                  className="font-sans text-xs uppercase tracking-wider text-muted-foreground"
+                >
                   Telefone
                 </label>
                 <input
@@ -187,7 +218,10 @@ const ContactFormSection = () => {
               </div>
 
               <div>
-                <label htmlFor="message" className="font-sans text-xs uppercase tracking-wider text-muted-foreground">
+                <label
+                  htmlFor="message"
+                  className="font-sans text-xs uppercase tracking-wider text-muted-foreground"
+                >
                   Mensagem
                 </label>
                 <textarea
@@ -208,7 +242,7 @@ const ContactFormSection = () => {
                   animate={{ opacity: 1, y: 0 }}
                   className="rounded-xl border border-gold/25 bg-gold/10 px-4 py-3 font-sans text-sm text-foreground"
                 >
-                  Mensagem enviada — abrimos o WhatsApp para você.
+                  Mensagem enviada. Abrimos o WhatsApp para você.
                 </motion.div>
               )}
 

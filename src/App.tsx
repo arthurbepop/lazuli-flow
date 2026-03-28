@@ -1,15 +1,9 @@
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ReactNode } from "react";
 import React from "react";
 import { ReactLenis } from "lenis/react";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { Toaster } from "@/components/ui/toaster";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import Index from "./pages/Index.tsx";
-import NotFound from "./pages/NotFound.tsx";
-
-const queryClient = new QueryClient();
+import Index from "./pages/Index";
+import NotFound from "./pages/NotFound";
 
 class ErrorBoundary extends React.Component<
   { children: ReactNode },
@@ -39,7 +33,7 @@ class ErrorBoundary extends React.Component<
             </p>
             <button
               onClick={() => window.location.reload()}
-              className="px-4 py-2 bg-primary text-primary-foreground rounded hover:bg-primary/90"
+              className="rounded bg-primary px-4 py-2 text-primary-foreground transition-colors hover:bg-primary/90"
             >
               Recarregar
             </button>
@@ -62,18 +56,12 @@ const lenisOptions = {
 const App = () => (
   <ErrorBoundary>
     <ReactLenis root options={lenisOptions}>
-      <QueryClientProvider client={queryClient}>
-        <TooltipProvider>
-          <Toaster />
-          <Sonner />
-          <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </BrowserRouter>
-        </TooltipProvider>
-      </QueryClientProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Index />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </BrowserRouter>
     </ReactLenis>
   </ErrorBoundary>
 );

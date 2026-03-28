@@ -1,12 +1,12 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import { usePrefersReducedMotion } from "@/hooks/use-prefers-reduced-motion";
 import {
   fadeUp,
   staggerContainer,
   staggerItem,
   viewportReveal,
 } from "@/lib/motion";
-import { usePrefersReducedMotion } from "@/hooks/use-prefers-reduced-motion";
 
 const steps = [
   {

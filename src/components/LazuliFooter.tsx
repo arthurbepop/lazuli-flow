@@ -1,5 +1,5 @@
 import { Instagram, MapPin, Phone } from "lucide-react";
-import { SOCIAL_MEDIA, CONTACT_INFO } from "@/lib/constants";
+import { CONTACT_INFO, SOCIAL_MEDIA } from "@/lib/constants";
 
 const LazuliFooter = () => {
   return (

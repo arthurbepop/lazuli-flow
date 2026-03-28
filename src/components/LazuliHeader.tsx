@@ -1,8 +1,8 @@
 import { useState } from "react";
+import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "framer-motion";
 import { Menu, X } from "lucide-react";
-import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion";
 import lazuliLogo from "@/assets/lazulilogotransparente.png";
-import { HEADER_NAV_LINKS, WHATSAPP_URL } from "@/lib/constants";
+import { HEADER_NAV_LINKS, HEADER_NAV_LINKS_MINIMAL, WHATSAPP_URL } from "@/lib/constants";
 import { smoothEase } from "@/lib/motion";
 
 const LazuliHeader = () => {
@@ -22,21 +22,21 @@ const LazuliHeader = () => {
           : "border-transparent bg-cobalt/80 backdrop-blur-xl"
       }`}
     >
-      <div className="container mx-auto flex items-center justify-between px-6 py-1">
+      <div className="container mx-auto flex items-center justify-between px-6 py-3">
         <a href="#top" className="flex-shrink-0">
           <img
             src={lazuliLogo}
             alt="Lazuli estúdio de pilates"
-            className="h-16 w-auto"
+            className="h-12 w-auto"
           />
         </a>
 
         <nav className="hidden items-center gap-1.5 md:gap-2 lg:flex lg:gap-3">
-          {HEADER_NAV_LINKS.map((link) => (
+          {HEADER_NAV_LINKS_MINIMAL.map((link) => (
             <a
               key={link.href}
               href={link.href}
-              className="whitespace-nowrap text-[11px] font-medium text-primary-foreground/88 transition-colors hover:text-gold lg:text-xs xl:text-sm"
+              className="whitespace-nowrap text-sm font-medium text-primary-foreground/90 transition-colors hover:text-gold lg:text-base xl:text-base"
             >
               {link.label}
             </a>

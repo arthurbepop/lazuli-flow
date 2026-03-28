@@ -6,7 +6,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Lenis + layout */
 html.lenis,
 html.lenis body {
   height: auto;
@@ -18,7 +17,7 @@ html.lenis body {
 
 @layer base {
   :root {
-    /* Azul Lazuli #1E3A8A · Champagne #D4AF37 — HSL */
+    /* Azul Lazuli #1E3A8A + Champagne #D4AF37 */
     --background: 226 48% 12%;
     --foreground: 40 25% 96%;
 
@@ -69,6 +68,11 @@ html.lenis body {
 @layer base {
   * {
     @apply border-border;
+  }
+
+  html,
+  body {
+    overflow-x: hidden;
   }
 
   body {

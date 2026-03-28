@@ -1,95 +1,51 @@
 # Lazuli Estúdio de Pilates
 
-Website moderno e responsivo para o Lazuli Estúdio de Pilates, localizado em Santa Cruz do Sul. Construído com tecnologias modernas para oferecer a melhor experiência aos visitantes.
+Landing page institucional do Lazuli Estúdio de Pilates, em Santa Cruz do Sul.
+O projeto foi construído com Vite, React, TypeScript e Tailwind CSS, com foco em
+uma experiência elegante, responsiva e orientada à conversão.
 
-## 🚀 Começando
-
-### Pré-requisitos
-- Node.js 18.x ou superior
-- npm ou bun
-
-### Instalação
+## Como rodar
 
 ```sh
-# Clonar o repositório
-git clone <seu-repositorio>
-cd lazuli-flow
-
-# Instalar dependências
 npm install
-# ou
-bun install
-```
-
-### Desenvolvimento
-
-```sh
-# Iniciar servidor de desenvolvimento
 npm run dev
-
-# Abrir em http://localhost:8080
 ```
 
-### Build de Produção
+O servidor local sobe em `http://localhost:8080`.
 
-```sh
-npm run build
-npm run preview
-```
+## Scripts
 
-## 📋 Comandos Disponíveis
+- `npm run dev` inicia o ambiente de desenvolvimento.
+- `npm run build` gera o build de produção.
+- `npm run preview` abre o build localmente.
+- `npm run lint` executa o ESLint.
+- `npm test` executa os testes com Vitest.
 
-- `npm run dev` - Inicia o servidor de desenvolvimento
-- `npm run build` - Build para produção
-- `npm run preview` - Preview local do build
-- `npm run lint` - Executa o linter
-- `npm test` - Executa testes unitários
-- `npm run test:watch` - Modo watch para testes
+## Estrutura
 
-## 🛠️ Tecnologias
-
-- **Vite** - Build tool rápido e moderno
-- **React 18** - Biblioteca UI
-- **TypeScript** - Type safety
-- **Tailwind CSS** - Utility-first CSS
-- **shadcn-ui** - Componentes acessíveis
-- **React Router** - Roteamento
-- **React Hook Form** - Gerenciamento de formulários
-- **React Query** - Data fetching
-- **Vitest** - Testing framework
-- **Playwright** - E2E testing
-
-## 📁 Estrutura do Projeto
-
-```
+```text
 src/
-├── components/       # Componentes React
-│   ├── ui/          # Componentes UI reutilizáveis
-│   └── *Section.tsx # Seções da página
-├── pages/           # Páginas da aplicação
-├── hooks/           # Custom React hooks
-├── lib/             # Utilitários e helpers
-├── assets/          # Imagens e recursos
-└── test/            # Testes
+|-- assets/
+|-- components/
+|-- hooks/
+|-- lib/
+|-- pages/
+`-- test/
 ```
 
-## 🌐 Deployment
+## Stack
 
-O projeto pode ser deployado em qualquer plataforma que suporte Node.js:
+- Vite
+- React 18
+- TypeScript
+- Tailwind CSS
+- Framer Motion
+- Lenis
+- Vitest
+- Playwright
 
-- **Vercel** - Recomendado para Next.js/Vite projects
-- **Netlify** - Suporte total a Vite
-- **GitHub Pages** - Com ações do GitHub
-- **Docker** - Containerizar a aplicação
+## Observações
 
-## 📝 Variáveis de Ambiente
-
-Copie `.env.example` para `.env.local` e configure conforme necessário:
-
-```bash
-cp .env.example .env.local
-```
-
-## 📄 Licença
-
-Este projeto é de uso privado do Lazuli Estúdio de Pilates.
+- O conteúdo institucional da landing está centralizado em `src/lib/constants.ts`.
+- As animações compartilhadas ficam em `src/lib/motion.ts`.
+- O formulário de contato abre uma conversa no WhatsApp com a mensagem já preenchida.

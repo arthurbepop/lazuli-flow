@@ -1,12 +1,12 @@
 import { motion } from "framer-motion";
-import { Briefcase, User, RotateCw, Zap } from "lucide-react";
+import { Briefcase, RotateCw, User, Zap } from "lucide-react";
+import { usePrefersReducedMotion } from "@/hooks/use-prefers-reduced-motion";
 import {
   fadeUp,
   staggerContainer,
   staggerItem,
   viewportReveal,
 } from "@/lib/motion";
-import { usePrefersReducedMotion } from "@/hooks/use-prefers-reduced-motion";
 
 const profiles = [
   {
@@ -81,10 +81,7 @@ const BenefitsSection = () => {
               }
               className="glass-zen group rounded-2xl p-8 transition-colors hover:border-gold/25"
             >
-              <profile.icon
-                className="h-7 w-7 text-gold"
-                strokeWidth={1.15}
-              />
+              <profile.icon className="h-7 w-7 text-gold" strokeWidth={1.15} />
               <h3 className="font-display mt-6 text-xl text-foreground">
                 {profile.title}
               </h3>

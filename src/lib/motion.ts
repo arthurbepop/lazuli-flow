@@ -1,6 +1,6 @@
 import type { Transition, Variants } from "framer-motion";
 
-/** Editorial-style ease — smooth deceleration */
+/** Editorial-style easing with smooth deceleration. */
 export const smoothEase = [0.22, 1, 0.36, 1] as const;
 
 export const softSpring: Transition = {

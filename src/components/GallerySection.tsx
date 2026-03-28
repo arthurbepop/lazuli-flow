@@ -5,13 +5,13 @@ import gallery2 from "@/assets/pilates4.jpg";
 import gallery3 from "@/assets/pilates5.jpg";
 import gallery4 from "@/assets/pilates6.jpg";
 import RevealImage from "@/components/RevealImage";
+import { SOCIAL_MEDIA } from "@/lib/constants";
 import {
   fadeUp,
   staggerContainer,
   staggerItem,
   viewportReveal,
 } from "@/lib/motion";
-import { SOCIAL_MEDIA } from "@/lib/constants";
 
 const images = [
   { src: gallery1, alt: "Equipamentos de pilates de ponta" },

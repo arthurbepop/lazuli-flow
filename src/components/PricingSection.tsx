@@ -1,13 +1,13 @@
 import { motion } from "framer-motion";
 import { MessageCircle } from "lucide-react";
+import { usePrefersReducedMotion } from "@/hooks/use-prefers-reduced-motion";
+import { WHATSAPP_URL } from "@/lib/constants";
 import {
   fadeUp,
   staggerContainer,
   staggerItem,
   viewportReveal,
 } from "@/lib/motion";
-import { WHATSAPP_URL } from "@/lib/constants";
-import { usePrefersReducedMotion } from "@/hooks/use-prefers-reduced-motion";
 
 const pricingPlans = [
   {
@@ -125,9 +125,7 @@ const PricingSection = () => {
           </h3>
           <p className="mx-auto mt-6 max-w-xl font-sans leading-relaxed text-muted-foreground">
             Descreva seu objetivo e criaremos um plano personalizado para você.
-            <span className="mt-3 block font-medium text-gold">
-              A avaliação é gratuita.
-            </span>
+            <span className="mt-3 block font-medium text-gold">A avaliação é gratuita.</span>
           </p>
 
           <motion.a
