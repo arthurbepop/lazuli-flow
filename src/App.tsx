@@ -57,6 +57,11 @@ const lenisOptions = {
   easing: (t: number) => 1 - Math.pow(1 - t, 3.2),
 } as const;
 
+const routerBase =
+  import.meta.env.BASE_URL !== "/" && import.meta.env.BASE_URL.endsWith("/")
+    ? import.meta.env.BASE_URL.slice(0, -1)
+    : import.meta.env.BASE_URL;
+
 const shouldUseNativeScroll = () => {
   if (typeof window === "undefined") {
     return false;
@@ -70,7 +75,7 @@ const shouldUseNativeScroll = () => {
 };
 
 const AppRouter = () => (
-  <BrowserRouter>
+  <BrowserRouter basename={routerBase}>
     <Routes>
       <Route path="/" element={<Index />} />
       <Route path="*" element={<NotFound />} />

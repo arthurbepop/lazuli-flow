@@ -8,11 +8,33 @@
     />
     <link rel="icon" type="image/png" href="/src/assets/lazulilogotransparente.png" />
     <title>Lazuli Estúdio de Pilates</title>
-    <meta name="description" content="Descubra o poder do Pilates no ambiente mais acolhedor e premium de Santa Cruz do Sul. Agende sua aula experimental no Lazuli." />
+    <meta
+      name="description"
+      content="Descubra o poder do Pilates no ambiente mais acolhedor e premium de Santa Cruz do Sul. Agende sua aula experimental no Lazuli."
+    />
     <meta name="author" content="Lazuli Estúdio de Pilates" />
     <meta property="og:title" content="Lazuli Estúdio de Pilates" />
     <meta property="og:description" content="Movimento que transforma. Equilíbrio que inspira." />
     <meta property="og:type" content="website" />
+    <script>
+      (function (location) {
+        if (location.search[1] === "/") {
+          const decoded = location.search
+            .slice(1)
+            .split("&")
+            .map(function (segment) {
+              return segment.replace(/~and~/g, "&");
+            })
+            .join("?");
+
+          window.history.replaceState(
+            null,
+            "",
+            location.pathname.slice(0, -1) + decoded + location.hash,
+          );
+        }
+      })(window.location);
+    </script>
   </head>
 
   <body>

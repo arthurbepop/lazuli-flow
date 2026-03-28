@@ -21,6 +21,20 @@ O servidor local sobe em `http://localhost:8080`.
 - `npm run lint` executa o ESLint.
 - `npm test` executa os testes com Vitest.
 
+## GitHub Pages
+
+O projeto já está preparado para publicação no GitHub Pages:
+
+- o `base` do Vite é ajustado automaticamente no build do GitHub Actions;
+- o workflow de deploy está em [`.github/workflows/deploy-pages.yml`](C:/Users/arthur/Documents/projetos/lazuli/lazuli-flow/.github/workflows/deploy-pages.yml);
+- há fallback de SPA para o ambiente do Pages.
+
+Para publicar:
+
+1. envie o repositório para o GitHub;
+2. em `Settings > Pages`, selecione `GitHub Actions` como fonte;
+3. faça push na branch `main` ou `master`.
+
 ## Estrutura
 
 ```text
