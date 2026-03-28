@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import { usePrefersReducedMotion } from "@/hooks/use-prefers-reduced-motion";
+import LuxeCard from "@/components/LuxeCard";
 import {
   fadeUp,
   staggerContainer,
@@ -40,8 +40,6 @@ const steps = [
 ];
 
 const ClassesSection = () => {
-  const reduced = usePrefersReducedMotion();
-
   return (
     <section id="abordagem" className="relative z-10 py-28 md:py-36">
       <div className="container mx-auto max-w-6xl px-6">
@@ -72,12 +70,8 @@ const ClassesSection = () => {
           className="grid gap-6 md:grid-cols-2 lg:grid-cols-4"
         >
           {steps.map((step, index) => (
-            <motion.div
-              key={step.number}
-              variants={staggerItem}
-              className="glass-zen group relative overflow-hidden rounded-2xl p-8 transition-colors hover:border-gold/30"
-            >
-              <div className="relative z-10">
+            <motion.div key={step.number} variants={staggerItem}>
+              <LuxeCard className="glass-zen group relative overflow-hidden rounded-[1.75rem] p-8">
                 <div className="mb-6 flex items-start justify-between">
                   <span className="font-display text-5xl font-medium text-gold/35 transition-colors group-hover:text-gold/60">
                     {step.number}
@@ -97,7 +91,7 @@ const ClassesSection = () => {
                 {index < steps.length - 1 && (
                   <div className="absolute -right-2 top-1/2 hidden text-gold/30 lg:block">
                     <motion.span
-                      animate={reduced ? undefined : { x: [0, 4, 0] }}
+                      animate={{ x: [0, 4, 0] }}
                       transition={{
                         duration: 2.4,
                         repeat: Infinity,
@@ -108,7 +102,7 @@ const ClassesSection = () => {
                     </motion.span>
                   </div>
                 )}
-              </div>
+              </LuxeCard>
             </motion.div>
           ))}
         </motion.div>

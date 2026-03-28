@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { ReactNode } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import React from "react";
 import { ReactLenis } from "lenis/react";
 import Index from "./pages/Index";
@@ -47,23 +47,75 @@ class ErrorBoundary extends React.Component<
 }
 
 const lenisOptions = {
-  duration: 1.15,
+  duration: 1.35,
+  lerp: 0.075,
   smoothWheel: true,
-  lerp: 0.085,
-  wheelMultiplier: 0.92,
+  syncTouch: true,
+  syncTouchLerp: 0.09,
+  touchMultiplier: 0.9,
+  wheelMultiplier: 0.82,
+  easing: (t: number) => 1 - Math.pow(1 - t, 3.2),
 } as const;
 
-const App = () => (
-  <ErrorBoundary>
-    <ReactLenis root options={lenisOptions}>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </ReactLenis>
-  </ErrorBoundary>
+const shouldUseNativeScroll = () => {
+  if (typeof window === "undefined") {
+    return false;
+  }
+
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const coarsePointer = window.matchMedia("(pointer: coarse)").matches;
+  const touchPoints = navigator.maxTouchPoints > 0;
+
+  return prefersReducedMotion || coarsePointer || touchPoints;
+};
+
+const AppRouter = () => (
+  <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<Index />} />
+      <Route path="*" element={<NotFound />} />
+    </Routes>
+  </BrowserRouter>
 );
+
+const App = () => {
+  const [useNativeScroll, setUseNativeScroll] = useState(shouldUseNativeScroll);
+
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return undefined;
+    }
+
+    const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const coarsePointerQuery = window.matchMedia("(pointer: coarse)");
+    const updateScrollMode = () => setUseNativeScroll(shouldUseNativeScroll());
+
+    updateScrollMode();
+
+    reducedMotionQuery.addEventListener?.("change", updateScrollMode);
+    coarsePointerQuery.addEventListener?.("change", updateScrollMode);
+    window.addEventListener("resize", updateScrollMode);
+    window.addEventListener("orientationchange", updateScrollMode);
+
+    return () => {
+      reducedMotionQuery.removeEventListener?.("change", updateScrollMode);
+      coarsePointerQuery.removeEventListener?.("change", updateScrollMode);
+      window.removeEventListener("resize", updateScrollMode);
+      window.removeEventListener("orientationchange", updateScrollMode);
+    };
+  }, []);
+
+  return (
+    <ErrorBoundary>
+      {useNativeScroll ? (
+        <AppRouter />
+      ) : (
+        <ReactLenis root options={lenisOptions}>
+          <AppRouter />
+        </ReactLenis>
+      )}
+    </ErrorBoundary>
+  );
+};
 
 export default App;

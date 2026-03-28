@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
-import { MessageCircle } from "lucide-react";
-import { usePrefersReducedMotion } from "@/hooks/use-prefers-reduced-motion";
-import { WHATSAPP_URL } from "@/lib/constants";
+import { ArrowRight } from "lucide-react";
+import LuxeCard from "@/components/LuxeCard";
 import {
   fadeUp,
   staggerContainer,
@@ -37,8 +36,6 @@ const pricingPlans = [
 ];
 
 const PricingSection = () => {
-  const reduced = usePrefersReducedMotion();
-
   return (
     <section id="precos" className="relative z-10 py-28 md:py-36">
       <div className="container mx-auto max-w-6xl px-6">
@@ -66,25 +63,11 @@ const PricingSection = () => {
           whileInView="visible"
           viewport={viewportReveal}
           variants={staggerContainer}
-          className="mb-16 grid gap-6 md:grid-cols-2 lg:grid-cols-4"
+          className="grid gap-6 md:grid-cols-2 lg:grid-cols-4"
         >
           {pricingPlans.map((plan) => (
-            <motion.div
-              key={plan.title}
-              variants={staggerItem}
-              whileHover={
-                reduced
-                  ? undefined
-                  : {
-                      y: -3,
-                      transition: { type: "spring", stiffness: 300, damping: 24 },
-                    }
-              }
-              className="glass-zen group relative flex flex-col overflow-hidden rounded-2xl p-8"
-            >
-              <div className="absolute inset-0 bg-gradient-to-br from-gold/[0.07] to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-
-              <div className="relative z-10 flex h-full flex-col">
+            <motion.div key={plan.title} variants={staggerItem}>
+              <LuxeCard className="glass-zen group relative flex h-full flex-col overflow-hidden rounded-[1.75rem] p-8">
                 <span className="mb-5 w-fit rounded-full border border-gold/20 bg-gold/5 px-3 py-1 font-sans text-[10px] font-semibold uppercase tracking-wider text-gold">
                   {plan.highlight}
                 </span>
@@ -108,38 +91,27 @@ const PricingSection = () => {
                     </span>
                   </p>
                 </div>
-              </div>
+              </LuxeCard>
             </motion.div>
           ))}
         </motion.div>
 
-        <motion.div
+        <motion.p
           initial="hidden"
           whileInView="visible"
           viewport={viewportReveal}
           variants={fadeUp}
-          className="glass-zen mx-auto max-w-3xl rounded-[1.5rem] px-8 py-12 text-center md:px-12"
+          className="mx-auto mt-12 max-w-2xl text-center font-sans text-sm leading-relaxed text-muted-foreground"
         >
-          <h3 className="font-display text-3xl text-foreground md:text-4xl">
-            Vamos conversar?
-          </h3>
-          <p className="mx-auto mt-6 max-w-xl font-sans leading-relaxed text-muted-foreground">
-            Descreva seu objetivo e criaremos um plano personalizado para você.
-            <span className="mt-3 block font-medium text-gold">A avaliação é gratuita.</span>
-          </p>
-
-          <motion.a
-            href={WHATSAPP_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            className="mt-10 inline-flex items-center gap-2 rounded-full bg-gold px-8 py-3.5 font-sans text-sm font-semibold uppercase tracking-widest text-accent-foreground transition-shadow hover:bg-gold-light hover:shadow-lg"
+          Não sabe qual plano faz mais sentido para você?{" "}
+          <a
+            href="#contato"
+            className="inline-flex items-center gap-1 font-semibold text-gold transition-colors hover:text-gold-light"
           >
-            <MessageCircle className="h-5 w-5" />
-            Iniciar conversa no WhatsApp
-          </motion.a>
-        </motion.div>
+            Fale com a gente
+            <ArrowRight className="h-4 w-4" />
+          </a>
+        </motion.p>
       </div>
     </section>
   );

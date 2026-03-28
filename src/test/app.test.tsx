@@ -19,7 +19,7 @@ describe("Index page", () => {
       }),
     ).toBeInTheDocument();
     expect(
-      screen.getByRole("heading", { name: /vamos conversar sobre seus objetivos/i }),
+      screen.getByRole("heading", { name: /o pr.ximo movimento come.a aqui\./i }),
     ).toBeInTheDocument();
     expect(screen.getAllByText(/@pilateslazuli/i).length).toBeGreaterThan(0);
   });
@@ -42,9 +42,6 @@ describe("ContactFormSection", () => {
     fireEvent.change(screen.getByLabelText(/^nome$/i), {
       target: { value: "Ana" },
     });
-    fireEvent.change(screen.getByLabelText(/^e-mail$/i), {
-      target: { value: "ana@email.com" },
-    });
     fireEvent.change(screen.getByLabelText(/^telefone$/i), {
       target: { value: "(51) 99999-9999" },
     });
@@ -52,14 +49,13 @@ describe("ContactFormSection", () => {
       target: { value: "Quero agendar uma aula." },
     });
 
-    fireEvent.click(screen.getByRole("button", { name: /enviar mensagem/i }));
+    fireEvent.click(screen.getByRole("button", { name: /continuar no whatsapp/i }));
 
     expect(openSpy).toHaveBeenCalledTimes(1);
     expect(openSpy).toHaveBeenCalledWith(
       `${WHATSAPP_URL}?text=${encodeURIComponent(
         [
           "Nome: Ana",
-          "E-mail: ana@email.com",
           "Telefone: (51) 99999-9999",
           "Mensagem: Quero agendar uma aula.",
         ].join("\n"),
@@ -69,12 +65,13 @@ describe("ContactFormSection", () => {
     );
 
     expect(screen.getByLabelText(/^nome$/i)).toHaveValue("");
-    expect(screen.getByLabelText(/^e-mail$/i)).toHaveValue("");
     expect(screen.getByLabelText(/^telefone$/i)).toHaveValue("");
     expect(screen.getByLabelText(/^mensagem$/i)).toHaveValue("");
 
     expect(
       screen.getByText(/mensagem enviada\..*whatsapp para voc./i),
     ).toBeInTheDocument();
+    expect(screen.queryByLabelText(/^e-mail$/i)).not.toBeInTheDocument();
+    expect(screen.queryByText(/^e-mail$/i)).not.toBeInTheDocument();
   });
 });

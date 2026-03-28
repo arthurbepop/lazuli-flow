@@ -15,45 +15,37 @@ html.lenis body {
   scroll-behavior: auto !important;
 }
 
+.lenis.lenis-stopped {
+  overflow: clip;
+}
+
 @layer base {
   :root {
-    /* Azul Lazuli #1E3A8A + Champagne #D4AF37 */
     --background: 226 48% 12%;
     --foreground: 40 25% 96%;
-
     --card: 226 42% 16%;
     --card-foreground: 40 25% 96%;
-
     --popover: 226 42% 14%;
     --popover-foreground: 40 25% 96%;
-
     --primary: 226 64% 33%;
     --primary-foreground: 40 30% 98%;
-
     --secondary: 226 35% 18%;
     --secondary-foreground: 40 25% 94%;
-
     --muted: 226 32% 20%;
     --muted-foreground: 40 15% 72%;
-
     --accent: 46 65% 52%;
     --accent-foreground: 226 64% 18%;
-
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
-
     --border: 226 28% 26%;
     --input: 226 28% 22%;
     --ring: 46 55% 52%;
-
     --radius: 1rem;
-
     --cobalt: 226 64% 33%;
     --cobalt-deep: 226 68% 22%;
     --gold: 46 65% 52%;
     --gold-light: 46 55% 68%;
     --offwhite: 40 25% 96%;
-
     --sidebar-background: 226 45% 14%;
     --sidebar-foreground: 40 20% 92%;
     --sidebar-primary: 226 64% 33%;
@@ -75,10 +67,22 @@ html.lenis body {
     overflow-x: hidden;
   }
 
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    scroll-padding-top: 5.5rem;
+  }
+
   body {
     @apply bg-background font-sans text-foreground antialiased;
     font-family: "Inter", system-ui, sans-serif;
     line-height: 1.75;
+    text-rendering: optimizeLegibility;
+    -webkit-tap-highlight-color: transparent;
+    background-image:
+      radial-gradient(circle at 10% 8%, hsl(46 76% 54% / 0.06), transparent 18%),
+      radial-gradient(circle at 84% 18%, hsl(226 88% 58% / 0.13), transparent 26%),
+      linear-gradient(180deg, hsl(226 52% 12%) 0%, hsl(226 54% 10%) 100%);
   }
 
   h1,
@@ -99,8 +103,11 @@ html.lenis body {
     line-height: 1.85;
   }
 
-  html {
-    scroll-padding-top: 5.5rem;
+  input,
+  textarea,
+  select,
+  button {
+    font: inherit;
   }
 }
 
@@ -141,12 +148,174 @@ html.lenis body {
     box-shadow: inset 0 1px 0 hsl(0 0% 100% / 0.04);
   }
 
+  .editorial-frame {
+    position: relative;
+    background:
+      linear-gradient(180deg, hsl(0 0% 100% / 0.1), hsl(0 0% 100% / 0.03)),
+      linear-gradient(135deg, hsl(226 44% 18% / 0.64), hsl(226 40% 10% / 0.46));
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid hsl(0 0% 100% / 0.12);
+    box-shadow:
+      0 36px 120px hsl(226 70% 3% / 0.34),
+      inset 0 1px 0 hsl(0 0% 100% / 0.08);
+  }
+
+  .editorial-frame::before {
+    content: "";
+    position: absolute;
+    inset: 1.25rem;
+    border-radius: calc(2.4rem - 1rem);
+    border: 1px solid hsl(0 0% 100% / 0.07);
+    pointer-events: none;
+  }
+
+  .editorial-plate {
+    position: relative;
+    background:
+      linear-gradient(180deg, hsl(0 0% 100% / 0.055), hsl(0 0% 100% / 0.02)),
+      hsl(226 40% 13% / 0.68);
+    border: 1px solid hsl(0 0% 100% / 0.08);
+    box-shadow:
+      0 24px 60px hsl(226 70% 4% / 0.18),
+      inset 0 1px 0 hsl(0 0% 100% / 0.05);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+  }
+
+  .editorial-plate::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    background: linear-gradient(180deg, hsl(0 0% 100% / 0.04), transparent 24%);
+  }
+
+  .section-kicker {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    font-family: "Inter", system-ui, sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.38em;
+    text-transform: uppercase;
+    color: hsl(40 14% 70% / 0.42);
+  }
+
+  .section-kicker::before {
+    content: "";
+    width: 4rem;
+    height: 1px;
+    background: linear-gradient(90deg, hsl(46 68% 58% / 0.46), transparent);
+  }
+
+  .auric-card {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    transition:
+      box-shadow 600ms cubic-bezier(0.22, 1, 0.36, 1),
+      border-color 600ms cubic-bezier(0.22, 1, 0.36, 1);
+    box-shadow:
+      0 24px 72px hsl(226 70% 4% / 0.18),
+      inset 0 1px 0 hsl(0 0% 100% / 0.05);
+  }
+
+  .auric-card-glow {
+    position: absolute;
+    inset: -12%;
+    z-index: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(circle at 50% 14%, hsl(46 80% 66% / 0.34), transparent 34%),
+      linear-gradient(180deg, transparent 0%, hsl(46 68% 54% / 0.1) 48%, transparent 100%);
+    filter: blur(28px);
+    mix-blend-mode: screen;
+  }
+
+  .image-shell {
+    position: relative;
+    isolation: isolate;
+    border-radius: 2rem;
+    border: 1px solid hsl(0 0% 100% / 0.08);
+    background:
+      linear-gradient(180deg, hsl(226 52% 18% / 0.08), hsl(226 52% 8% / 0.18)),
+      hsl(226 38% 16%);
+    box-shadow:
+      0 28px 80px hsl(226 70% 4% / 0.2),
+      inset 0 1px 0 hsl(0 0% 100% / 0.06);
+  }
+
+  .image-shell::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    background:
+      linear-gradient(180deg, hsl(0 0% 100% / 0.12), transparent 26%),
+      linear-gradient(180deg, transparent 60%, hsl(226 62% 10% / 0.22) 100%);
+    opacity: 0.9;
+  }
+
+  .image-shell-media {
+    display: block;
+    border-radius: inherit;
+    transform: scale(1.01);
+    filter: saturate(0.88) contrast(0.94) brightness(0.92);
+    transition:
+      transform 900ms cubic-bezier(0.22, 1, 0.36, 1),
+      filter 900ms cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform, filter;
+  }
+
+  .image-shell-tint {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    border-radius: inherit;
+    background:
+      radial-gradient(circle at 50% 18%, hsl(0 0% 100% / 0.08), transparent 38%),
+      linear-gradient(180deg, hsl(226 42% 18% / 0.12), hsl(226 56% 10% / 0.26));
+    mix-blend-mode: screen;
+  }
+
   .hero-ken-burns {
     animation: hero-ken-burns 32s ease-in-out infinite alternate;
   }
 
   .grain-overlay {
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .image-shell:hover .image-shell-media {
+    transform: scale(1.04);
+    filter: saturate(0.96) contrast(0.98) brightness(0.96);
+  }
+}
+
+@media (pointer: coarse) {
+  .glass-zen {
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+  }
+
+  .editorial-frame {
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+  }
+
+  .editorial-plate {
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+
+  .auric-card-glow {
+    filter: blur(22px);
   }
 }
 
@@ -162,5 +331,14 @@ html.lenis body {
 @media (prefers-reduced-motion: reduce) {
   .hero-ken-burns {
     animation: none;
+  }
+
+  .image-shell-media {
+    transform: none;
+    transition: none;
+  }
+
+  .auric-card {
+    transform: none !important;
   }
 }

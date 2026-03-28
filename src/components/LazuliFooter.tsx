@@ -5,7 +5,7 @@ const LazuliFooter = () => {
   return (
     <footer
       id="rodape"
-      className="relative z-10 border-t border-white/10 bg-cobalt/90 py-20 backdrop-blur-sm"
+      className="relative z-10 border-t border-white/10 bg-cobalt/90 pb-[calc(5rem+env(safe-area-inset-bottom))] pt-16 backdrop-blur-sm md:py-20"
     >
       <div className="container mx-auto px-6">
         <div className="grid gap-10 text-center sm:grid-cols-3">
@@ -39,7 +39,7 @@ const LazuliFooter = () => {
           <div>
             <Instagram className="mx-auto h-6 w-6 text-gold" strokeWidth={1.5} />
             <h2 className="mt-3 text-sm font-semibold uppercase tracking-wider text-primary-foreground">
-              Social
+              Instagram
             </h2>
             <a
               href={SOCIAL_MEDIA.instagram}

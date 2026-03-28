@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Star } from "lucide-react";
-import { usePrefersReducedMotion } from "@/hooks/use-prefers-reduced-motion";
+import LuxeCard from "@/components/LuxeCard";
 import {
   fadeUp,
   staggerContainer,
@@ -13,54 +13,58 @@ const testimonials = [
     name: "Marina S.",
     role: "Executiva de TI",
     quote:
-      "Sofria por anos com dores crônicas nas costas. Após 8 semanas de Pilates, não tenho mais dor. O atendimento 1-a-1 fez toda a diferença.",
+      "Sofria há anos com dores crônicas nas costas. Depois de oito semanas, meu corpo ficou muito mais leve e o atendimento individual fez toda a diferença.",
     rating: 5,
   },
   {
     name: "João P.",
     role: "Empresário",
     quote:
-      "Buscava força com segurança para meu ombro que tem lesão antiga. A intensidade é real, mas segura. Recomendo muito.",
+      "Eu buscava força com segurança para um ombro lesionado. Encontrei intensidade na medida certa, com muita técnica e confiança.",
     rating: 5,
   },
   {
     name: "Ana C.",
     role: "Professora",
     quote:
-      "Não esperava sentir tanta calma depois de cada aula. É exercício físico + terapia. Encontrei meu refúgio.",
+      "Cada aula me devolve presença. Saio mais alinhada, mais calma e com a sensação de que meu corpo finalmente está sendo escutado.",
     rating: 5,
   },
   {
     name: "Felipe M.",
     role: "Fotógrafo",
     quote:
-      "Melhorei minha postura profundamente. Meus colegas notaram a diferença nas minhas fotos de antes e depois!",
+      "Minha postura mudou visivelmente. Além do físico, o estúdio tem uma atmosfera rara, que faz a experiência parecer muito especial.",
     rating: 5,
   },
 ];
 
 const TestimonialsSection = () => {
-  const reduced = usePrefersReducedMotion();
-
   return (
-    <section id="depoimentos" className="relative z-10 py-28 md:py-36">
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold/20 to-transparent" />
+    <section id="depoimentos" className="relative z-10 py-28 md:py-40">
       <div className="container relative mx-auto max-w-6xl px-6">
+        <div className="section-kicker mb-10 justify-end">
+          <span>06</span>
+          <span>Vozes do estúdio</span>
+        </div>
+
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={viewportReveal}
           variants={fadeUp}
-          className="mx-auto mb-20 max-w-2xl text-center"
+          className="mx-auto max-w-3xl text-center"
         >
           <span className="font-sans text-[11px] font-semibold uppercase tracking-[0.35em] text-gold">
             Confiança
           </span>
-          <h2 className="mt-5 text-4xl font-medium text-foreground md:text-5xl">
-            O que nossos clientes dizem
+          <h2 className="mt-6 text-4xl font-medium text-foreground md:text-6xl md:leading-[0.98]">
+            Histórias reais de transformação,
+            <span className="block text-primary-foreground/78">calma e constância.</span>
           </h2>
-          <p className="mt-6 font-sans text-lg leading-relaxed text-muted-foreground">
-            Histórias reais de transformação com Pilates no Lazuli.
+          <p className="mx-auto mt-7 max-w-2xl font-sans text-lg leading-[1.9] text-muted-foreground">
+            O que permanece depois das aulas não é apenas postura ou força. É uma
+            mudança de percepção sobre o próprio corpo.
           </p>
         </motion.div>
 
@@ -69,38 +73,40 @@ const TestimonialsSection = () => {
           whileInView="visible"
           viewport={viewportReveal}
           variants={staggerContainer}
-          className="grid gap-6 md:grid-cols-2 lg:grid-cols-4"
+          className="mt-18 grid gap-6 md:grid-cols-2"
         >
-          {testimonials.map((testimonial) => (
-            <motion.article
+          {testimonials.map((testimonial, index) => (
+            <motion.div
               key={testimonial.name}
               variants={staggerItem}
-              whileHover={
-                reduced
-                  ? undefined
-                  : { y: -3, transition: { type: "spring", stiffness: 380, damping: 26 } }
-              }
-              className="glass-zen group flex flex-col rounded-2xl p-8"
+              className={index % 2 === 1 ? "md:translate-y-12" : ""}
             >
-              <div className="mb-5 flex gap-0.5">
-                {[...Array(testimonial.rating)].map((_, i) => (
-                  <Star key={i} className="h-4 w-4 fill-gold text-gold" />
-                ))}
-              </div>
+              <LuxeCard className="glass-zen group flex min-h-[22rem] flex-col rounded-[2rem] p-8 md:p-9">
+                <div className="mb-7 flex items-center justify-between">
+                  <div className="flex gap-0.5">
+                    {[...Array(testimonial.rating)].map((_, i) => (
+                      <Star key={i} className="h-4 w-4 fill-gold text-gold" />
+                    ))}
+                  </div>
+                  <span className="font-sans text-[10px] uppercase tracking-[0.32em] text-primary-foreground/34">
+                    0{index + 1}
+                  </span>
+                </div>
 
-              <p className="flex-grow font-sans text-sm font-light leading-relaxed text-foreground/90">
-                &ldquo;{testimonial.quote}&rdquo;
-              </p>
-
-              <div className="mt-8 border-t border-white/10 pt-6">
-                <h3 className="font-display text-lg text-foreground">
-                  {testimonial.name}
-                </h3>
-                <p className="mt-1 font-sans text-xs uppercase tracking-wider text-muted-foreground">
-                  {testimonial.role}
+                <p className="flex-grow font-display text-3xl leading-[1.14] text-foreground md:text-[2.15rem]">
+                  &ldquo;{testimonial.quote}&rdquo;
                 </p>
-              </div>
-            </motion.article>
+
+                <div className="mt-10 border-t border-white/8 pt-6">
+                  <h3 className="font-sans text-sm font-semibold uppercase tracking-[0.24em] text-primary-foreground/74">
+                    {testimonial.name}
+                  </h3>
+                  <p className="mt-2 font-sans text-sm leading-relaxed text-muted-foreground">
+                    {testimonial.role}
+                  </p>
+                </div>
+              </LuxeCard>
+            </motion.div>
           ))}
         </motion.div>
       </div>
