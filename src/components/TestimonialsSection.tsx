@@ -73,15 +73,15 @@ const TestimonialsSection = () => {
           whileInView="visible"
           viewport={viewportReveal}
           variants={staggerContainer}
-          className="mt-18 grid gap-6 md:grid-cols-2"
+          className="mt-16 grid items-stretch gap-6 md:mt-[4.5rem] md:grid-cols-2 md:[grid-auto-rows:1fr]"
         >
           {testimonials.map((testimonial, index) => (
             <motion.div
               key={testimonial.name}
               variants={staggerItem}
-              className={index % 2 === 1 ? "md:translate-y-12" : ""}
+              className="h-full"
             >
-              <LuxeCard className="glass-zen group flex min-h-[22rem] flex-col rounded-[2rem] p-8 md:p-9">
+              <LuxeCard className="glass-zen group flex h-full min-h-[22rem] flex-col rounded-[2rem] p-8 md:p-9">
                 <div className="mb-7 flex items-center justify-between">
                   <div className="flex gap-0.5">
                     {[...Array(testimonial.rating)].map((_, i) => (

@@ -17,22 +17,22 @@ const images = [
   {
     src: gallery1,
     alt: "Equipamentos de pilates de ponta",
-    className: "aspect-[0.95/1.2] object-[center_44%]",
+    className: "aspect-[1/1.12] object-[center_44%]",
   },
   {
     src: gallery2,
     alt: "Reformer para aulas personalizadas",
-    className: "aspect-[1/1.08] object-[center_42%] sm:translate-y-14",
+    className: "aspect-[1/1.12] object-[center_42%]",
   },
   {
     src: gallery3,
     alt: "Espaço acolhedor e tranquilo",
-    className: "aspect-[0.98/1.18] object-[center_48%]",
+    className: "aspect-[1/1.12] object-[center_48%]",
   },
   {
     src: gallery4,
     alt: "Aula privada em ação",
-    className: "aspect-[1/1.08] object-[center_34%] sm:translate-y-8",
+    className: "aspect-[1/1.12] object-[center_34%]",
   },
 ];
 

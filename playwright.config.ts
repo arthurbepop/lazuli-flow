@@ -1,10 +1,8 @@
-import { createLovableConfig } from "lovable-agent-playwright-config/config";
+import { defineConfig } from "@playwright/test";
 
-export default createLovableConfig({
-  // Add your custom playwright configuration overrides here
-  // Example:
-  // timeout: 60000,
-  // use: {
-  //   baseURL: 'http://localhost:3000',
-  // },
+export default defineConfig({
+  // Keep this minimal until dedicated E2E tests are added.
+  testDir: "./e2e",
+  testIgnore: ["**/src/test/**"],
+  reporter: "list",
 });

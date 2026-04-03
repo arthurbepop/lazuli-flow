@@ -70,8 +70,8 @@ const ClassesSection = () => {
           className="grid gap-6 md:grid-cols-2 lg:grid-cols-4"
         >
           {steps.map((step, index) => (
-            <motion.div key={step.number} variants={staggerItem}>
-              <LuxeCard className="glass-zen group relative overflow-hidden rounded-[1.75rem] p-8">
+            <motion.div key={step.number} variants={staggerItem} className="h-full">
+              <LuxeCard className="glass-zen group relative flex h-full flex-col overflow-hidden rounded-[1.75rem] p-8">
                 <div className="mb-6 flex items-start justify-between">
                   <span className="font-display text-5xl font-medium text-gold/35 transition-colors group-hover:text-gold/60">
                     {step.number}

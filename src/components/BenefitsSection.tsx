@@ -66,8 +66,8 @@ const BenefitsSection = () => {
           className="mt-20 grid gap-6 sm:grid-cols-2 lg:grid-cols-4"
         >
           {profiles.map((profile) => (
-            <motion.div key={profile.title} variants={staggerItem}>
-              <LuxeCard className="glass-zen group rounded-[1.75rem] p-8">
+            <motion.div key={profile.title} variants={staggerItem} className="h-full">
+              <LuxeCard className="glass-zen group flex h-full flex-col rounded-[1.75rem] p-8">
                 <profile.icon className="h-7 w-7 text-gold" strokeWidth={1.15} />
                 <h3 className="font-display mt-6 text-xl text-foreground">
                   {profile.title}
