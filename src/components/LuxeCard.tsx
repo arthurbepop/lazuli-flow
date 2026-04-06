@@ -7,7 +7,10 @@ type LuxeCardProps = PropsWithChildren<{
   className?: string;
   contentClassName?: string;
 }> &
-  HTMLAttributes<HTMLDivElement>;
+  Omit<
+    HTMLAttributes<HTMLDivElement>,
+    "onDrag" | "onDragStart" | "onDragEnd" | "onAnimationStart" | "onAnimationEnd" | "onAnimationIteration"
+  >;
 
 const LuxeCard = ({
   children,

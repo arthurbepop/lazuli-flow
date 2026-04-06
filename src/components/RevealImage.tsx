@@ -3,7 +3,15 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { usePrefersReducedMotion } from "@/hooks/use-prefers-reduced-motion";
 import { cn } from "@/lib/utils";
 
-type RevealImageProps = ImgHTMLAttributes<HTMLImageElement> & {
+type RevealImageProps = Omit<
+  ImgHTMLAttributes<HTMLImageElement>,
+  | "onDrag"
+  | "onDragStart"
+  | "onDragEnd"
+  | "onAnimationStart"
+  | "onAnimationEnd"
+  | "onAnimationIteration"
+> & {
   wrapperClassName?: string;
 };
 

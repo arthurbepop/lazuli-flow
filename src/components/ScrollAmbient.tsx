@@ -8,9 +8,15 @@ const ScrollAmbient = () => {
   const reduced = usePrefersReducedMotion();
   const { scrollYProgress } = useScroll();
 
-  const y1 = useTransform(scrollYProgress, [0, 1], reduced ? [0, 0] : ["0%", "28%"]);
-  const y2 = useTransform(scrollYProgress, [0, 1], reduced ? [0, 0] : ["0%", "-22%"]);
-  const y3 = useTransform(scrollYProgress, [0, 1], reduced ? [0, 0] : ["5%", "-35%"]);
+  const y1 = reduced
+    ? useTransform(scrollYProgress, [0, 1], ["0%", "0%"])
+    : useTransform(scrollYProgress, [0, 1], ["0%", "28%"]);
+  const y2 = reduced
+    ? useTransform(scrollYProgress, [0, 1], ["0%", "0%"])
+    : useTransform(scrollYProgress, [0, 1], ["0%", "-22%"]);
+  const y3 = reduced
+    ? useTransform(scrollYProgress, [0, 1], ["5%", "5%"])
+    : useTransform(scrollYProgress, [0, 1], ["5%", "-35%"]);
   const goldOpacity = useTransform(scrollYProgress, [0, 0.5, 1], [0.06, 0.14, 0.08]);
 
   return (
