@@ -1,9 +1,9 @@
 import { motion } from "framer-motion";
 import { ExternalLink } from "lucide-react";
-import gallery1 from "@/assets/pilates3.jpg";
-import gallery2 from "@/assets/pilates4.jpg";
-import gallery3 from "@/assets/pilates5.jpg";
-import gallery4 from "@/assets/pilates6.jpg";
+import gallery1 from "@/assets/pilates3.webp";
+import gallery2 from "@/assets/pilates4.webp";
+import gallery3 from "@/assets/pilates5.webp";
+import gallery4 from "@/assets/pilates6.webp";
 import RevealImage from "@/components/RevealImage";
 import { SOCIAL_MEDIA } from "@/lib/constants";
 import {

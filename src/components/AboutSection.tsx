@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Award, Heart } from "lucide-react";
-import aboutImage from "@/assets/pilates2.jpg";
+import aboutImage from "@/assets/pilates2.webp";
 import RevealImage from "@/components/RevealImage";
 import {
   slideFromLeft,

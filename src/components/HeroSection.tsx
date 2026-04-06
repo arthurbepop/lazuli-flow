@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ChevronDown, MessageCircle } from "lucide-react";
-import heroImage from "@/assets/pilates1.jpg";
+import heroImage from "@/assets/pilates1.webp";
 import { STUDIO_INFO, WHATSAPP_URL } from "@/lib/constants";
 import { fadeUp, smoothEase, softSpring } from "@/lib/motion";
 import { usePrefersReducedMotion } from "@/hooks/use-prefers-reduced-motion";

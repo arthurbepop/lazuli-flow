@@ -1,9 +1,13 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode, Suspense, lazy, useEffect, useState } from "react";
 import React from "react";
-import { ReactLenis } from "lenis/react";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
+
+const ReactLenis = lazy(async () => {
+  const module = await import("lenis/react");
+  return { default: module.ReactLenis };
+});
 
 class ErrorBoundary extends React.Component<
   { children: ReactNode },
@@ -115,9 +119,11 @@ const App = () => {
       {useNativeScroll ? (
         <AppRouter />
       ) : (
-        <ReactLenis root options={lenisOptions}>
-          <AppRouter />
-        </ReactLenis>
+        <Suspense fallback={<AppRouter />}>
+          <ReactLenis root options={lenisOptions}>
+            <AppRouter />
+          </ReactLenis>
+        </Suspense>
       )}
     </ErrorBoundary>
   );

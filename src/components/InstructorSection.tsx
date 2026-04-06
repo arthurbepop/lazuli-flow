@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Brain, Heart, Users } from "lucide-react";
-import luizaImage from "@/assets/luiza.jpg";
+import luizaImage from "@/assets/luiza.webp";
 import RevealImage from "@/components/RevealImage";
 import {
   slideFromLeft,

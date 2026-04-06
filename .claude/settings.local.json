@@ -11,7 +11,18 @@
       "Bash(npx playwright:*)",
       "Bash(npm outdated:*)",
       "Bash(npm view:*)",
-      "Bash(npm install:*)"
+      "Bash(npm install:*)",
+      "Bash(magick:*)",
+      "Bash(ffmpeg:*)",
+      "Bash(powershell -NoProfile -Command \"Add-Type -AssemblyName System.Drawing; $img=[System.Drawing.Image]::FromFile\\('C:\\\\Users\\\\arthur\\\\Documents\\\\projetos\\\\lazuli\\\\lazuli-flow\\\\src\\\\assets\\\\pilates1.jpg'\\); Write-Output \\($img.Width.ToString\\(\\) + 'x' + $img.Height.ToString\\(\\)\\); $img.Dispose\\(\\)\")",
+      "Bash(powershell -NoProfile -Command \"Add-Type -AssemblyName System.Drawing; $enc=[System.Drawing.Imaging.ImageCodecInfo]::GetImageEncoders\\(\\) | Where-Object {$_.MimeType -eq 'image/jpeg'}; if \\($enc\\) { 'JPEG_ENCODER_OK' }\")",
+      "Bash(npx:*)",
+      "Bash(node:*)",
+      "Bash(cmd.exe /c where powershell)",
+      "Bash(\"/c/WINDOWS/System32/WindowsPowerShell/v1.0/powershell.exe\" -NoProfile -Command \"Write-Output 'PS_OK'\")",
+      "Bash(\"/c/WINDOWS/System32/WindowsPowerShell/v1.0/powershell.exe\" -NoProfile -Command \"try { Add-Type -AssemblyName System.Drawing; 'DRAWING_OK' } catch { $_ | Out-String; exit 1 }\")",
+      "Bash(\"/c/WINDOWS/System32/WindowsPowerShell/v1.0/powershell.exe\" -NoProfile -Command \"$path='C:\\\\Users\\\\arthur\\\\Documents\\\\projetos\\\\lazuli\\\\lazuli-flow\\\\src\\\\assets\\\\pilates1.jpg'; Test-Path $path\")",
+      "Bash(\"/c/WINDOWS/System32/WindowsPowerShell/v1.0/powershell.exe\" -NoProfile -Command \"$ErrorActionPreference='Stop'; $path='C:\\\\Users\\\\arthur\\\\Documents\\\\projetos\\\\lazuli\\\\lazuli-flow\\\\src\\\\assets\\\\pilates1.jpg'; $img=[System.Drawing.Image]::FromFile\\($path\\); Write-Output \\($img.Width.ToString\\(\\) + 'x' + $img.Height.ToString\\(\\)\\); $img.Dispose\\(\\)\")"
     ]
   }
 }
