@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const NotFound = () => {
   const location = useLocation();
@@ -26,12 +26,12 @@ const NotFound = () => {
         </p>
 
         <div className="flex justify-center">
-          <a
-            href="/"
+          <Link
+            to="/"
             className="rounded-full bg-gold px-6 py-3 text-base font-semibold text-accent-foreground transition-colors hover:bg-gold-light"
           >
             Voltar ao início
-          </a>
+          </Link>
         </div>
 
         <div className="pt-4 text-sm text-muted-foreground">
