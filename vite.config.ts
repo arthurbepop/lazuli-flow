@@ -6,8 +6,14 @@ const repoName = process.env.GITHUB_REPOSITORY?.split("/")[1];
 const isRootPagesRepo = repoName?.endsWith(".github.io");
 const inferredPagesBase =
   repoName && !isRootPagesRepo ? `/${repoName}/` : "/";
+const envBasePath = process.env.BASE_PATH?.trim();
+const normalizedEnvBasePath = envBasePath
+  ? envBasePath.endsWith("/")
+    ? envBasePath
+    : `${envBasePath}/`
+  : undefined;
 const base =
-  process.env.BASE_PATH ??
+  normalizedEnvBasePath ??
   (process.env.GITHUB_ACTIONS === "true" ? inferredPagesBase : "/");
 
 export default defineConfig({
